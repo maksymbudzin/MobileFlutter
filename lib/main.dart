@@ -2,6 +2,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,10 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Startup Name Generator',
       theme: ThemeData(
-        primaryColor: Colors.white,
-         
-      ),
+        primaryColor: Colors.white),
       home: RandomWords(),
+
     );
   }
 }
@@ -24,6 +24,7 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+
   final _suggestions = <WordPair>[];
   final _saved = <WordPair>{};
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -36,10 +37,42 @@ class _RandomWordsState extends State<RandomWords> {
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Text('+'),
+        onPressed: () {
+          showAlertDialog(context);
+        },
+      ),
       body: _buildSuggestions(),
     );
   }
+  showAlertDialog(BuildContext context){
 
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () { },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+
+      title: Text("My cat"),
+      content: Image.network('https://sun1-29.userapi.com/-rccRwSHOSVDTeZzIet3KPUlkJ-py27vjvEzVg/cyNRvxHsPhg.jpg'),
+
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
